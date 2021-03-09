@@ -10,19 +10,24 @@ afService.dump_temp = (data)=>{
       const uri = url;
       
       MongoClient.connect( url,function(err,db){
-         // console.log(db)
-          db.collection("tempdb").insertMany(data, function(err, res) {
-            console.log('enter')
-            if (err) throw err;
-            console.log("Number of documents inserted: " + res.insertedCount);
-            db.close();
-            console.log('ret')
-            return data;
-            })
+          console.log(data)
+          db.collection("tempdb").insertOne(data)
           });
           return data;
       // index
 })
+}
+afService.get_temp=async()=>{
+  let d=[]
+  var db=await MongoClient.connect(url);
+  d=await db.collection("tempdb").find({}).toArray()
+        return d;
+}
+afService.get_local=async()=>{
+  let d=[]
+  var db=await MongoClient.connect(url);
+  d=await db.collection("localdb").find({}).toArray()
+        return d;
 }
 afService.dump_local = (data)=>{
     return new Promise((resolve,reject)=>{
@@ -31,7 +36,7 @@ afService.dump_local = (data)=>{
       
       MongoClient.connect( url,function(err,db){
          // console.log(db)
-          db.collection("tempdb").insertMany(data, function(err, res) {
+          db.collection("localdb").insertMany(data, function(err, res) {
             console.log('enter')
             if (err) throw err;
             console.log("Number of documents inserted: " + res.insertedCount);

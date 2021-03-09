@@ -18,4 +18,24 @@ repo.dump_local = async (data) => {
         throw e;
     }
 }
+repo.get_temp = async () => {
+    try {
+
+    ;
+      return  services.afService.get_temp();
+
+    } catch (e) {
+        throw e;
+    }
+}
+repo.get_local = async () => {
+    try {
+
+    ;
+      return  services.afService.get_local();
+
+    } catch (e) {
+        throw e;
+    }
+}
 module.exports = repo;

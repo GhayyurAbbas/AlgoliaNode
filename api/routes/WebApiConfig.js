@@ -4,10 +4,11 @@ const { fstat } = require('fs');
 
 module.exports = function(app) {
   var afcollector = require('../collectors/AFCollector');
+  var afcontroller = require('../Controllers/AF');
 
   // todoList Routes
   app.route('/api/AF/')
-    .get(afcollector.get_vouchers)
+    .get(afcontroller.script_vouchers)
 
 
  
