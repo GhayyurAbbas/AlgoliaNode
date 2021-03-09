@@ -18,3 +18,4 @@ repo.dump_local = async (data) => {
         throw e;
     }
 }
+module.exports = repo;

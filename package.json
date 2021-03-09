@@ -14,7 +14,8 @@
     "experss": "0.0.1-security",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
-    "mongodb": "^3.6.4",
+    "mongodb": "^2.2.33",
+    "mongoose": "^5.11.19",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {

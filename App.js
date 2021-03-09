@@ -1,17 +1,7 @@
 const algoliasearch=require("algoliasearch");
 const client=algoliasearch("WS3OELWDQ8","cfcde2a48b6802bc8ffb27a500e12652");
 const index=client.initIndex("Test");
-const actors=[
-{
-    name:"ghayyur",
-    rating:1
-},
-{
-    name:"abbas",
-    rating:2
-}
 
-];
 // try{
 
 //     const slowAndSteady = new Promise(function(resolve, reject) {
@@ -71,17 +61,19 @@ const xml2js = require('xml2js');
 const xml = fs.readFileSync('D:/Algolia.xml');
 
 // convert XML to JSON
-xml2js.parseString(xml,{trim:true},{explicitArray:true}, { mergeAttrs: false }, (err, result) => {
+xml2js.parseString(xml, { mergeAttrs: false }, (err, result) => {
     if (err) {
         throw err;
     }
 
+    console.log('here')
     // `result` is a JavaScript object
     // convert it to a JSON string
     const json = JSON.stringify(result, null, 4);
 
     // save JSON in a file
     fs.writeFileSync('D:/Algolia.json', json);
+   console.log(result)
 
 }); 
 const obj=require("D:/Algolia.json");
@@ -97,11 +89,26 @@ for(i=0;i<a.length;i++)
     })
 }
 console.log(oo)
-index
-.saveObjects(oo, { autoGenerateObjectIDIfNotExist: true })
-.then(({ objectIDs }) => {
-  console.log(objectIDs);
-});
+
+var url = "mongodb://localhost:27017/Algolia";
+
+const MongoClient = require('mongodb');
+const uri = url;
+
+MongoClient.connect( url,function(err,db){
+   // console.log(db)
+    db.collection("tempdb").insertMany(oo, function(err, res) {
+      console.log('enter')
+      if (err) throw err;
+      console.log("Number of documents inserted: " + res.insertedCount);
+      db.close();
+      })
+    });
+// index
+// .saveObjects(oo, { autoGenerateObjectIDIfNotExist: true })
+// .then(({ objectIDs }) => {
+//   console.log(objectIDs);
+// });
 //   index
 //     .saveObjects(obj.ReturnVoucherObj.Vouchers[0].Voucher, { autoGenerateObjectIDIfNotExist: true })
 //     .then(({ objectIDs }) => {

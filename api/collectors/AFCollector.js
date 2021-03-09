@@ -6,6 +6,7 @@ const index=client.initIndex("Test");
 var http = require('http'),
 fs = require('fs');
 const xml2js = require('xml2js');
+
 exports.get_vouchers = async function(req, res) {
     try{
         var request = http.get("http://ws-external.afnt.co.uk/apiv1/AFFILIATES/af_vouchers.asmx/Vouchers_getAllVouchers?username=muneeba.64@gmail.com&password=International01", function(response) {
@@ -39,8 +40,9 @@ for(i=0;i<a.length;i++)
 }
 console.log(oo)
 //dumping temporarily 
-var flagNewData=true;
-const data = await repos.afRepo.dump_temp(oo);
+var flagNewData=false;
+repos.afRepo.dump_temp(oo);
+flagNewData=true;
 
 if(flagNewData){
 
@@ -49,6 +51,7 @@ if(flagNewData){
     .then(({ objectIDs }) => {
       console.log(objectIDs);
     });
+    flagNewData=false;
 }
 
 
