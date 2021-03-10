@@ -17,6 +17,7 @@
     "mongodb": "^2.2.33",
     "mongoose": "^5.11.19",
     "node-fetch": "^2.6.1",
+    "xml-parse-from-string": "^1.0.1",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {

@@ -6,13 +6,18 @@ const index=client.initIndex("Test");
 var http = require('http'),
 fs = require('fs');
 
-
+//this function is requesting collector for vouchers and then it is writing that data to xml file and also returning the xml data
 exports.get_vouchers = ()=> {
     try{
         let res;
         console.log('get_voucher enter')
+        //following url is provided by collectors 
         var request = http.get("http://ws-external.afnt.co.uk/apiv1/AFFILIATES/af_vouchers.asmx/Vouchers_getAllVouchers?username=muneeba.64@gmail.com&password=International01", function(response) {
     if (response.statusCode === 200) {
+        fs.truncate('D:/Algolia.xml', 0, function(){
+         //   console.log('done')
+        })
+        //writing xml response to Algolia.xml file
         var file = fs.createWriteStream("D:/Algolia.xml");
         response.pipe(file);
     
@@ -24,8 +29,16 @@ exports.get_vouchers = ()=> {
 });
 const xml = fs.readFileSync('D:/Algolia.xml');
 try {
+    //reading xml as string and returning
     var data = fs.readFileSync('D:/Algolia.xml', 'utf8');
-    console.log(data);
+   //console.log(data);
+//     repos.afRepo.dump_temp({Date:Date.now(),RawData:xmldata,status:'Not Processed',
+// collector:{
+//     name:'AF',
+    
+// }
+// },
+//     );
     return data    
 } catch(e) {
     console.log('Error:', e.stack);

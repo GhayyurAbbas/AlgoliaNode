@@ -20,7 +20,7 @@ afService.dump_temp = (data)=>{
 afService.get_temp=async()=>{
   let d=[]
   var db=await MongoClient.connect(url);
-  d=await db.collection("tempdb").find({}).toArray()
+  d=await db.collection("tempdb").find({status:'Not Processed'}).toArray()
         return d;
 }
 afService.get_local=async()=>{
