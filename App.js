@@ -124,16 +124,22 @@ var url = "mongodb://localhost:27017/Algolia";
 //   index.search('WALKER50').then(({ hits }) => {
 //         console.log(hits);
 //       });
-function get_temp(){
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-       ;
-        db.collection("tempdb").find({}).toArray(function(err, result) {
-          if (err) throw err;
-        //  console.log('result'+result);
-          db.close();
-         // console.log(result)
-          return result
-        });
-      });
+async function get_temp(){
+    // MongoClient.connect(url, function(err, db) {
+    //     if (err) throw err;
+    //    ;
+    //     db.collection("tempdb").find({}).toArray(function(err, result) {
+    //       if (err) throw err;
+    //     //  console.log('result'+result);
+    //       db.close();
+    //      // console.log(result)
+    //       return result
+    //     });
+    //   });
+    var d=new Date();
+    var a= await index.search('query', {
+      filters: `EndUnixTimeStamp < ${Math.floor(new Date(d).getTime() / 1000)}`
+    })
+    console.log('data in a' +a)
+    console.log(a);
 }

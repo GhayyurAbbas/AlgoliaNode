@@ -5,12 +5,13 @@
   "main": "App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon App.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "algoliasearch": "^4.8.5",
+    "dateformat": "^4.5.1",
     "experss": "0.0.1-security",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
