@@ -21,8 +21,8 @@ var format = require('dateFormat');
 //function being exported which hopefully gets the expired vouchers from the data base and then deletes them from the algolia
 exports.delete_expired_vouchers = async function (req, res) {
     try {
-
-    var expired_vouchers=await repos.afRepo.get_expired_vouchers(Math.floor(new Date(start).getTime() / 1000));
+var todaydate=new Date();
+    var expired_vouchers=await repos.afRepo.get_expired_vouchers(Math.floor(todaydate.getTime() / 1000));
     if(expired_vouchers.length>0)
     {
 //call to algolia for deleting the expired vouchers

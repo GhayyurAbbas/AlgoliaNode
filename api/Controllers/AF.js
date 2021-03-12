@@ -17,16 +17,6 @@ const BBVItem = require('../Models/BBVItem')
 var format = require('dateFormat');
 /* #endregion */
 
-
-// pass in the format of the string as first argument
-// async function  get_temp(){
-//     let d=[]
-// var db=await MongoClient.connect(url);
-// d=await db.collection("tempdb").find({}).toArray()
-//       return d;
-
-
-// }
 //this function is parsing xml string to json data. Here we are using xml2js package provided by npm........
 function get_json_parsed_data(data) {
 
