@@ -106,11 +106,11 @@ const index=client.initIndex("Test");
 //       db.close();
 //       })
 //     });
-var MongoClient = require('mongodb');
-var url = "mongodb://localhost:27017/Algolia";
-    //endshere
-    var a=get_temp()
-    console.log('data in a' +a)
+// var MongoClient = require('mongodb');
+// var url = "mongodb://localhost:27017/Algolia";
+//     //endshere
+//     var a=get_temp()
+//     console.log('data in a' +a)
 // index
 // .saveObjects(oo, { autoGenerateObjectIDIfNotExist: true })
 // .then(({ objectIDs }) => {
@@ -124,22 +124,30 @@ var url = "mongodb://localhost:27017/Algolia";
 //   index.search('WALKER50').then(({ hits }) => {
 //         console.log(hits);
 //       });
-async function get_temp(){
-    // MongoClient.connect(url, function(err, db) {
-    //     if (err) throw err;
-    //    ;
-    //     db.collection("tempdb").find({}).toArray(function(err, result) {
-    //       if (err) throw err;
-    //     //  console.log('result'+result);
-    //       db.close();
-    //      // console.log(result)
-    //       return result
-    //     });
-    //   });
-    var d=new Date();
-    var a= await index.search('query', {
-      filters: `EndUnixTimeStamp < ${Math.floor(new Date(d).getTime() / 1000)}`
-    })
-    console.log('data in a' +a)
-    console.log(a);
-}
+// async function get_temp(){
+//     // MongoClient.connect(url, function(err, db) {
+//     //     if (err) throw err;
+//     //    ;
+//     //     db.collection("tempdb").find({}).toArray(function(err, result) {
+//     //       if (err) throw err;
+//     //     //  console.log('result'+result);
+//     //       db.close();
+//     //      // console.log(result)
+//     //       return result
+//     //     });
+//     //   });
+//     var d=new Date();
+//     var a= await index.search('query', {
+//       filters: `EndUnixTimeStamp < ${Math.floor(new Date(d).getTime() / 1000)}`
+//     })
+//     console.log('data in a' +a)
+//     console.log(a);
+// }
+const cron=require('node-cron');
+let shell=require('shelljs');
+
+cron.schedule('*/10 * * * * *',function(){
+    console.log('fully fueled and reloaded');
+    if(shell.exec("dir").code !==0)
+    {console.log('something went wrong')}
+});
