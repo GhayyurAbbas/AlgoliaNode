@@ -168,6 +168,7 @@ exports.script_vouchers = async function (req, res) {
             console.log('local')
             console.log(localdbdata)
             var counter = 0;
+
             vouchersarray.forEach(function (item) {
                 var flag = true;
                 localdbdata.forEach(function (item2) {
@@ -177,6 +178,14 @@ exports.script_vouchers = async function (req, res) {
                 });
                 if (flag == true) { filteredarray.push(item); }
             });
+            /////with filter
+            // vouchersarray.forEach(function (item) {
+              
+            //     var retdata=data.filter(
+            //         function(data){ return data.name == code }
+            //     );
+            //     if (retdata.length==0) { filteredarray.push(item); }
+            // });
             console.log('filtered data')
             console.log(filteredarray)
             if (filteredarray.length > 0) { repos.afRepo.dump_local(filteredarray) }
