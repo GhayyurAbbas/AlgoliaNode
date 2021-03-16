@@ -15,19 +15,19 @@ exports.get_vouchers = ()=> {
         //following url is provided by collectors 
         var request = http.get("http://ws-external.afnt.co.uk/apiv1/AFFILIATES/af_vouchers.asmx/Vouchers_getAllVouchers?username=muneeba.64@gmail.com&password=International01", function(response) {
     if (response.statusCode === 200) {
-        fs.truncate('../../Algolia.xml', 0, function(){})
+        fs.truncate('./Algolia.xml', 0, function(){})
         //writing xml response to Algolia.xml file
-        var file = fs.createWriteStream('../../Algolia.xml')
+        var file = fs.createWriteStream('./Algolia.xml')
         response.pipe(file);
     }
     request.setTimeout(12000, function () {
         request.abort();
     });
 });
-const xml = fs.readFileSync('D:/Algolia.xml');
+const xml = fs.readFileSync('./Algolia.xml');
 try {
     //reading xml as string and returning
-    var data = fs.readFileSync('D:/Algolia.xml', 'utf8');
+    var data = fs.readFileSync('e:/Algolia.xml', 'utf8');
     
 //collectorsresponse
 //vouchers

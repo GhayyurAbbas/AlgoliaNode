@@ -27,12 +27,12 @@ function get_json_parsed_data(data) {
             throw err;
         }
         const json = JSON.stringify(result, null, 4);
-        fs.truncate('D:/Algolia.json', 0, function () { console.log('done') })
-        fs.writeFileSync('D:/Algolia.json', json);
+        fs.truncate('./Algolia.json', 0, function () { console.log('done') })
+        fs.writeFileSync('./Algolia.json', json);
 
     });
     console.log('parsed')
-    const obj = require("D:/Algolia.json");
+    const obj = require("../../Algolia.json");
 
     var oo = [];
     var a = obj.ReturnVoucherObj.Vouchers[0].Voucher;
@@ -192,25 +192,32 @@ exports.script_vouchers = async function (req, res) {
             flagNewData = true;
 
             if (flagNewData) {
-
-                index
+try{
+    index
                     .saveObjects(filteredarray, { autoGenerateObjectIDIfNotExist: true })
                     .then(({ objectIDs }) => {
                         console.log(objectIDs);
                     });
+}
+catch(err){console.log(err)}
+                // index
+                //     .saveObjects(filteredarray, { autoGenerateObjectIDIfNotExist: true })
+                //     .then(({ objectIDs }) => {
+                //         console.log(objectIDs);
+                //     });
                 flagNewData = false;
                 var errobj = {
                     statusCode: "200",
                     body: "Vouchers Successfully updated to Algolia"
                 }
-                res.json(errobj)
+                // res.json(errobj)
             }
             else {
                 var errobj = {
                     statusCode: "200",
                     body: "Something went wrong"
                 }
-                res.json(errobj)
+                // res.json(errobj)
             }
 
 
@@ -220,16 +227,17 @@ exports.script_vouchers = async function (req, res) {
                 statusCode: "500",
                 body: oo
             }
-            res.json(errobj)
+            // res.json(errobj)
         }
 
     }
     catch (err) {
-        var errobj = {
-            statusCode: "500",
-            body: JSON.stringify(err)
-        }
-        res.json(errobj)
+        console.log(err)
+        // var errobj = {
+        //     statusCode: "500",
+        //     body: JSON.stringify(err)
+        // }
+        // res.json(errobj)
     }
 
 }
