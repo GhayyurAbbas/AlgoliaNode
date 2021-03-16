@@ -6,6 +6,7 @@ const index=client.initIndex("Test");
 var http = require('http'),
 fs = require('fs');
 
+
 //this function is requesting collector for vouchers and then it is writing that data to xml file and also returning the xml data
 exports.get_vouchers = ()=> {
     try{
@@ -14,9 +15,9 @@ exports.get_vouchers = ()=> {
         //following url is provided by collectors 
         var request = http.get("http://ws-external.afnt.co.uk/apiv1/AFFILIATES/af_vouchers.asmx/Vouchers_getAllVouchers?username=muneeba.64@gmail.com&password=International01", function(response) {
     if (response.statusCode === 200) {
-        fs.truncate('D:/Algolia.xml', 0, function(){})
+        fs.truncate('../../Algolia.xml', 0, function(){})
         //writing xml response to Algolia.xml file
-        var file = fs.createWriteStream("D:/Algolia.xml");
+        var file = fs.createWriteStream('../../Algolia.xml')
         response.pipe(file);
     }
     request.setTimeout(12000, function () {
