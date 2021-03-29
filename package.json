@@ -12,6 +12,7 @@
   "dependencies": {
     "algoliasearch": "^4.8.5",
     "dateformat": "^4.5.1",
+    "dotenv": "^8.2.0",
     "experss": "0.0.1-security",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
@@ -21,6 +22,7 @@
     "node-fetch": "^2.6.1",
     "shell.js": "^3.2.3",
     "shelljs": "^0.8.4",
+    "xml-js": "^1.6.11",
     "xml-parse-from-string": "^1.0.1",
     "xml2js": "^0.4.23"
   },

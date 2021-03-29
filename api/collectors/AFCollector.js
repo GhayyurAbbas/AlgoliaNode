@@ -1,8 +1,5 @@
-const algoliasearch=require("algoliasearch");
 const repos = require("../repositories/index");
 const { json } = require("express");
-const client=algoliasearch("WS3OELWDQ8","cfcde2a48b6802bc8ffb27a500e12652");
-const index=client.initIndex("Test");
 var http = require('http'),
 fs = require('fs');
 
@@ -13,7 +10,7 @@ exports.get_vouchers = ()=> {
         let res;
         console.log('get_voucher enter')
         //following url is provided by collectors 
-        var request = http.get("http://ws-external.afnt.co.uk/apiv1/AFFILIATES/af_vouchers.asmx/Vouchers_getAllVouchers?username=muneeba.64@gmail.com&password=International01", function(response) {
+        var request = http.get(process.env.AF_COLLECTOR_KEY, function(response) {
     if (response.statusCode === 200) {
         fs.truncate('./Algolia.xml', 0, function(){})
         //writing xml response to Algolia.xml file
@@ -27,11 +24,11 @@ exports.get_vouchers = ()=> {
 const xml = fs.readFileSync('./Algolia.xml');
 try {
     //reading xml as string and returning
-    var data = fs.readFileSync('e:/Algolia.xml', 'utf8');
+    var data = fs.readFileSync('./Algolia.xml', 'utf8');
     
 //collectorsresponse
-//vouchers
-
+//vouchers//
+//fs.unlinkSync('./Algolia.xml')
     return data    
 } catch(e) {
     console.log('Error:', e.stack);

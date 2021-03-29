@@ -10,6 +10,15 @@ console.log('in repos')
         throw e;
     }
 }
+repo.dump_temp2 = async (data) => {
+    try {
+console.log('in repos')
+        return services.afService.dump_temp2(data);
+
+    } catch (e) {
+        throw e;
+    }
+}
 repo.dump_local = async (data) => {
     try {
 
@@ -19,11 +28,11 @@ repo.dump_local = async (data) => {
         throw e;
     }
 }
-repo.get_temp = async () => {
+repo.get_temp = async (collectorname) => {
     try {
 
     ;
-      return  services.afService.get_temp();
+      return  services.afService.get_temp(collectorname);
 
     } catch (e) {
         throw e;

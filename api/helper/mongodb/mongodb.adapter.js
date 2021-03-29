@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = process.env.CONNECTION_STRING;
 module.exports=function (){
     const uri = url;
     const client = new MongoClient(uri);

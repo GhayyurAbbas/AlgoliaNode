@@ -1,20 +1,11 @@
 /* #region  package imports */
-const algoliasearch = require("algoliasearch");
-const afcollector = require("../collectors/AFCollector");
 const repos = require("../repositories/index");
-const client = algoliasearch("WS3OELWDQ8", "cfcde2a48b6802bc8ffb27a500e12652");
-const index = client.initIndex("Test");
-var MongoClient = require('mongodb');
-const repo = require("../repositories/af/af.repo");
-var url = "mongodb://localhost:27017/Algolia";
-const xml2js = require('xml2js');
-var http = require('http'),
-    fs = require('fs');
-var assert = require('assert')
-const BBVConstants = require('../../BBVConstants')
-const isNullOrWhiteSpace = require('../../isNullOrWhiteSpace')
-const BBVItem = require('../Models/BBVItem')
-var format = require('dateFormat');
+const algoliasearch = require("algoliasearch");
+//algolia data goes here
+const client = algoliasearch(process.env.ALGOLIA_APPLICATION_ID, process.env.ALGOLIA_ADMIN_API_KEY);
+// const client = algoliasearch("GN8PSCG4T1", "acb3451cc065202afcedd46c4e51fad4");
+const index = client.initIndex(process.env.ALGOLIA_INDICE);
+//const index = client.initIndex("test");
 /* #endregion */
 
 
@@ -23,6 +14,7 @@ exports.delete_expired_vouchers = async function (req, res) {
     try {
 var todaydate=new Date();
     var expired_vouchers=await repos.afRepo.get_expired_vouchers(Math.floor(todaydate.getTime() / 1000));
+    console.log(expired_vouchers)
     if(expired_vouchers.length>0)
     {
 //call to algolia for deleting the expired vouchers

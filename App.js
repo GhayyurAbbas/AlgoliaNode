@@ -2,6 +2,7 @@ const algoliasearch=require("algoliasearch");
 const repo = require("./api/repositories/af/af.repo");
 const client=algoliasearch("WS3OELWDQ8","cfcde2a48b6802bc8ffb27a500e12652");
 const index=client.initIndex("Test");
+ 
 
 // try{
 
@@ -37,25 +38,89 @@ const index=client.initIndex("Test");
     //     console.log(hits);
     //   });
     //starts here
-//     var http = require('http'),
-//     fs = require('fs');
+    var http = require('http'),
+    fs = require('fs');
+    var d = new Date();
+     
+    // var ddate = d.getDate();
+    // var month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
+    // var year = d.getFullYear();
+    // var date=year+''+month+''+day+'.txt';
+     function intervalFunc() {
+        console.log('Cant stop me now!');
+      }
+       var dddd=null;
+    function myFunc(arg) {
+        // fs.readFile("F:/Algolia.txt", 'utf8', function(err, data) {
+        //     if (!err) {
+        //         dddd=data.split('\n');
+        //     }
+        // });
+         dddd= fs.readFileSync('F:/Algolia.txt','utf8').split('\n');
+         console.log(dddd[0].split(new RegExp(',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)', 'g')))
+      // console.log(dddd);
+      }
+      const fetch=require('node-fetch');
+    function a(cb)
+   {
+    return new Promise((resolve,reject)=>{
+        fetch('https://darwin.affiliatewindow.com/export-promotions/106661/2571471843d88e4100767d8799760845?promotionType=voucher&categoryIds=&regionIds=1&advertiserIds=&membershipStatus=&promotionStatus=')
+        //.then(res=>JSON.parse(res))
+       .then(json=>{
+         //  console.log(json.body);
+        var file= fs.createWriteStream("./AlgoliaWebGains.text")
+     json.body.pipe(file);
+    file.on('finish',resolve);
+    //        resolve(json)
+        });
+//          http.get('http://api.webgains.com/2.0/vouchers?key=8f0c5709832e2c29764bbfa6fc2bb82e&campaignId=197159&filters={"showexpired":"false","orderby":"programName","order":"asc","filterby":"ALL_PROGRAMS"}', function(response) {
+//     console.log(JSON.stringify(response));
+//     console.log('if');
+//      var file= fs.createWriteStream("./Algolia.json")
+//      response.pipe(file);
+//    file.on('finish',resolve);
+//   //  resolve(file);
+   
+//     //cb();
+//     //  dddd= fs.readFileSync('F:/Algolia.txt','utf8').split('\n');
+//     //     console.log(dddd[0].split(new RegExp(',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)', 'g')))
+// //cb();
+// })
+    });
+//console.log('hello')
+   }
 
-// var request = http.get("http://ws-external.afnt.co.uk/apiv1/AFFILIATES/af_vouchers.asmx/Vouchers_getAllVouchers?username=muneeba.64@gmail.com&password=International01", function(response) {
-//     if (response.statusCode === 200) {
-//         var file = fs.createWriteStream("D:/Algolia.xml");
-//         response.pipe(file);
-//     }
-//     // Add timeout.
-//     request.setTimeout(12000, function () {
-//         request.abort();
-//     });
-// });
+    function b()
+   {
+   // a(function() {
+    try{
+        dddd= fs.readFileSync('./Algolia.txt','utf8').split('\n');
+   
+        console.log(dddd[0].split(new RegExp(',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)', 'g')))
+   //return dddd[0].split(new RegExp(',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)', 'g'))
+    }catch(err){}
+//} );
+//,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$
+//for(;;){if(dddd){return dddd[0].split(new RegExp(',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)', 'g'))}}
+}
+   a().then(function(res){
+       console.log('returns')
+    dddd= fs.readFileSync('./AlgoliaWebGains.text','utf8').split('\n')
+  //  var asa=dddd[1];
+   // aaaa=asa.split(new RegExp(',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)', 'g'))
+for(i=1;i<dddd.length;i++)
+{
+    console.log(dddd[i].split(new RegExp(',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)', 'g')));
 
-// // fs.readFile("D:/Algolia.xml", 'utf8', function(err, data) {
-// //     if (!err) {
-// //         console.log(data);
-// //     }
-// // });
+}
+   // console.log(dddd.split(new RegExp(',(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)', 'g'))[0])
+    //fs.unlinkSync('./AlgoliaWebGains.text')
+   });
+// const dotenv=require('dotenv');
+// dotenv.config();
+// const aa=require('./api/Controllers/POS');
+// aa.script_vouchers();
+//b();
 // const xml2js = require('xml2js');
 // //const fs = require('fs');
 
@@ -143,11 +208,11 @@ const index=client.initIndex("Test");
 //     console.log('data in a' +a)
 //     console.log(a);
 // }
-const cron=require('node-cron');
-let shell=require('shelljs');
+// const cron=require('node-cron');
+// let shell=require('shelljs');
 
-cron.schedule('*/10 * * * * *',function(){
-    console.log('fully fueled and reloaded');
-    if(shell.exec("dir").code !==0)
-    {console.log('something went wrong')}
-});
+// cron.schedule('*/10 * * * * *',function(){
+//     console.log('fully fueled and reloaded');
+//     if(shell.exec("dir").code !==0)
+//     {console.log('something went wrong')}
+// });
